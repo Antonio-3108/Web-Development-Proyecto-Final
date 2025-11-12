@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final - Videojuego Multijugador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#caracteristicas">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tecnologia">Tecnología</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <!-- Hero Section -->
+        <section id="inicio" class="hero-section">
+            <div class="container hero-content">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6 hero-text">
+                        <div class="dynamic-greeting">
+                            <h2 id="greetingText" class="greeting-text">¡Buenos días!</h2>
+                        </div>
+                        <h1 class="hero-title">Proyecto Final</h1>
+                        <p class="hero-description">
+                            Este proyecto consiste en desarrollar un videojuego multijugador de tipo "platform fighter"
+                            para dos jugadores con conexión local. También se incluirá un editor de niveles con interfaz
+                            visual de arrastrar y soltar (drag-and-drop) que permitirá exportar
+                            mapas en formato JSON.
+                        </p>
+                    </div>
+                    <div class="col-lg-6 hero-image">
+                        <div class="image-container">
+                            <img src="imagenes/placeholder.png" alt="Proyecto Final Screenshot" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <!-- Características -->
+        <section id="caracteristicas" class="py-5 bg-light">
+            <div class="container py-5">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Multijugador Local</h4>
+                            <p class="text-muted">El juego permite conectar dos jugadores mediante hotspot, utilizando la misma dirección IP.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Editor de Mapas</h4>
+                            <p class="text-muted">Sistema de creación de niveles con interfaz drag-and-drop.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Sistema de Física</h4>
+                            <p class="text-muted">Implementa motor de física para colisiones y movimiento de personajes.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Persistencia de Datos</h4>
+                            <p class="text-muted">Los mapas creados y perfiles de usuario se almacenaran en MongoDB.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carrusel de imagenes -->
+        <section class="py-5">
+            <div class="container">
+                <div id="carouselExample" class="carousel slide carousel-container" data-bs-ride="carousel"
+                    aria-label="Galería de imágenes del proyecto">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Diapositiva 1"></button>
+                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"
+                            aria-label="Diapositiva 2"></button>
+                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
+                            aria-label="Diapositiva 3"></button>
+                    </div>
+
+                    <div class="carousel-inner rounded overflow-hidden shadow-sm">
+                        <div class="carousel-item active">
+                            <img src="imagenes/placeholder.png" class="d-block w-100" alt="Diapositiva 1">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Captura del juego</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imagenes/placeholder.png" class="d-block w-100" alt="Diapositiva 2">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Editor de mapas</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imagenes/placeholder.png" class="d-block w-100" alt="Diapositiva 3">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Conexión local</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tecnología -->
+        <section id="tecnologia" class="py-5">
+            <div class="container py-5">
+                <h2 class="section-title text-center">Tecnologías Utilizadas</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card tech-card h-100">
+                            <div class="card-header">
+                                <i class="fab fa-angular me-2"></i>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Angular</h5>
+                                <p class="text-muted mb-3">Framework para el desarrollo de la interfaz web</p>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Componente de Juego:</strong> Integra Phaser para la visualización y ejecución</li>
+                                    <li class="mb-2"><strong>Componente de Editor:</strong> Implementa funcionalidad drag-and-drop con Tiled</li>
+                                    <li class="mb-2"><strong>Exportación:</strong> Genera mapas en formato JSON</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card tech-card h-100">
+                            <div class="card-header">
+                                <i class="fas fa-gamepad me-2"></i>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Phaser</h5>
+                                <p class="text-muted mb-3">Motor 2D para la lógica y renderizado del juego</p>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Sistema de Física:</strong> Gestión de colisiones y movimiento</li>
+                                    <li class="mb-2"><strong>Renderizado:</strong> Procesamiento de sprites y animaciones</li>
+                                    <li class="mb-2"><strong>Input:</strong> Manejo de controles de jugadores</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card tech-card h-100">
+                            <div class="card-header">
+                                <i class="fas fa-network-wired me-2"></i>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Sistema de Networking</h5>
+                                <p class="text-muted mb-3">Conexión local mediante hotspot (misma dirección IP)</p>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Arquitectura:</strong> Comunicación por hilos compartidos
+                                    </li>
+                                    <li class="mb-2"><strong>Conexión Local:</strong> Funciona sin conexión a internet
+                                    </li>
+                                    <li class="mb-2"><strong>Sincronización:</strong> Actualización de estados en tiempo real</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card tech-card h-100">
+                            <div class="card-header">
+                                <i class="fas fa-database me-2"></i>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">MongoDB</h5>
+                                <p class="text-muted mb-3">Base de datos NoSQL para almacenamiento de información</p>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Mapas:</strong> Almacenamiento de niveles en formato JSON
+                                    </li>
+                                    <li class="mb-2"><strong>Usuarios:</strong> Información de perfiles y preferencias
+                                    </li>
+                                    <li class="mb-2"><strong>Estructura:</strong> Modelo de datos flexible</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Modo oscuro">
+        <i class="fa-solid fa-moon" id="darkModeIcon" style="color: #1d3252;"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
