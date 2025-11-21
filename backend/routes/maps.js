@@ -5,7 +5,7 @@ const path = require('path');
 const Map = require('../models/Map');
 const User = require('../models/User');
 const { cloudinary } = require('../config/cloudinary');
-const CloudinaryStorage = require('multer-storage-cloudinary');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 // Storage dinámico que cambia según el fieldname
 const dynamicStorage = new CloudinaryStorage({
