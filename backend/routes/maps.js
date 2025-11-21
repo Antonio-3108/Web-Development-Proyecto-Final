@@ -4,9 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const Map = require('../models/Map');
 const User = require('../models/User');
-const { cloudinary, mapImageStorage, mapFileStorage } = require('../config/cloudinary');
-
-// Configurar multer para manejar múltiples archivos con diferentes storages
+const { cloudinary } = require('../config/cloudinary');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 // Storage dinámico que cambia según el fieldname
