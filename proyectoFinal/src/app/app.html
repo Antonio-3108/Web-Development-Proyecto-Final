@@ -1,1 +1,17 @@
-<app-game-container></app-game-container>
+<div class="app-container">
+  <nav class="main-nav">
+    <div class="nav-brand">
+      <a routerLink="/" class="brand-link">DashWare</a>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+      <a routerLink="/game" routerLinkActive="active">Jugar</a>
+      <a routerLink="/community" routerLinkActive="active">Comunidad</a>
+      <a *ngIf="authService.isAuthenticated()" routerLink="/user-profile" routerLinkActive="active">Mi Perfil</a>
+      <a *ngIf="!authService.isAuthenticated()" routerLink="/create-profile" routerLinkActive="active" class="btn-profile">Iniciar Sesión</a>
+    </div>
+  </nav>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
