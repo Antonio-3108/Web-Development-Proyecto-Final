@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 interface User {
   name: string;
@@ -46,7 +47,7 @@ export class UserProfile implements OnInit {
   private authService = inject(AuthService);
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
 
   isEditing: boolean = false;
   isLoading: boolean = true;

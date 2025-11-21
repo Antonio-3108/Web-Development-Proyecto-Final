@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 interface PublicUser {
   username: string;
   bio?: string;
@@ -23,7 +24,7 @@ export class PublicProfile implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
   username: string = '';
   user: PublicUser | null = null;
   isLoading: boolean = true;
@@ -55,7 +56,7 @@ export class PublicProfile implements OnInit {
   }
   getProfileImageUrl(): string {
     if (this.user && this.user.profileImage) {
-      return `http://localhost:3000${this.user.profileImage}`;
+      return `https://dashware-backend.onrender.com${this.user.profileImage}`;
     }
     return '';
   }

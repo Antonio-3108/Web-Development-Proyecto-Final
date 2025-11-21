@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-map-upload',
   imports: [CommonModule, FormsModule],
@@ -14,7 +15,7 @@ export class MapUpload {
   private router = inject(Router);
   private http = inject(HttpClient);
   private authService = inject(AuthService);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
   mapName: string = '';
   mapDescription: string = '';
   selectedMapFile: File | null = null;

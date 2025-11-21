@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 interface FormData {
   username: string;
   email: string;
@@ -26,7 +27,7 @@ export class CreateProfile {
   private router = inject(Router);
   private authService = inject(AuthService);
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
   mode: 'create' | 'login' = 'create';
   isSubmitting: boolean = false;
   submitted: boolean = false;
