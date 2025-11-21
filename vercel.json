@@ -1,16 +1,9 @@
 {
-  "buildCommand": "cd proyectoFinal && npm install && npm run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "proyectoFinal/dist/proyecto-final/browser",
+  "installCommand": "npm install --legacy-peer-deps",
   "framework": null,
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/backend/server.js"
-    },
-    {
-      "source": "/uploads/(.*)",
-      "destination": "/backend/server.js"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
