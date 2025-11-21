@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "proyectoFinal/dist/proyecto-final/browser",
+  "outputDirectory": "proyectoFinal/dist/proyectoFinal/browser",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": null,
   "rewrites": [
