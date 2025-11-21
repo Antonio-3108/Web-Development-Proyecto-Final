@@ -5,7 +5,7 @@ const path = require('path');
 const Map = require('../models/Map');
 const User = require('../models/User');
 const { cloudinary } = require('../config/cloudinary');
-const CloudinaryStorage = require('multer-storage-cloudinary').CloudinaryStorage;
+const CloudinaryStorage = require('multer-storage-cloudinary');
 
 // Storage dinámico que cambia según el fieldname
 const dynamicStorage = new CloudinaryStorage({
@@ -50,6 +50,7 @@ const upload = multer({
     }
   }
 });
+
 router.get('/', async (req, res) => {
   try {
     const maps = await Map.find()
@@ -60,6 +61,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Error al obtener mapas', error: error.message });
   }
 });
+
 router.get('/popular', async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 10;
@@ -71,6 +73,7 @@ router.get('/popular', async (req, res) => {
     res.status(500).json({ message: 'Error al obtener mapas populares', error: error.message });
   }
 });
+
 router.get('/:mapId', async (req, res) => {
   try {
     const map = await Map.findById(req.params.mapId);
@@ -82,6 +85,7 @@ router.get('/:mapId', async (req, res) => {
     res.status(500).json({ message: 'Error al obtener mapa', error: error.message });
   }
 });
+
 router.get('/user/:userId', async (req, res) => {
   try {
     const maps = await Map.find({ author: req.params.userId })
@@ -91,6 +95,7 @@ router.get('/user/:userId', async (req, res) => {
     res.status(500).json({ message: 'Error al obtener mapas del usuario', error: error.message });
   }
 });
+
 router.post('/upload', upload.fields([
   { name: 'mapFile', maxCount: 1 },
   { name: 'mapImage', maxCount: 1 }
@@ -125,6 +130,7 @@ router.post('/upload', upload.fields([
     res.status(500).json({ message: 'Error al subir mapa', error: error.message });
   }
 });
+
 router.post('/:mapId/play', async (req, res) => {
   try {
     const map = await Map.findById(req.params.mapId);
@@ -138,6 +144,7 @@ router.post('/:mapId/play', async (req, res) => {
     res.status(500).json({ message: 'Error al actualizar jugadas', error: error.message });
   }
 });
+
 router.post('/:mapId/rate', async (req, res) => {
   try {
     const { userId, rating } = req.body;
@@ -161,6 +168,7 @@ router.post('/:mapId/rate', async (req, res) => {
     res.status(500).json({ message: 'Error al calificar mapa', error: error.message });
   }
 });
+
 router.put('/:mapId', async (req, res) => {
   try {
     const { userId, name, description } = req.body;
@@ -190,6 +198,7 @@ router.put('/:mapId', async (req, res) => {
     res.status(500).json({ message: 'Error al editar mapa', error: error.message });
   }
 });
+
 router.post('/:mapId/upvote', async (req, res) => {
   try {
     const mapId = req.params.mapId;
@@ -207,6 +216,7 @@ router.post('/:mapId/upvote', async (req, res) => {
     res.status(500).json({ message: 'Error al dar upvote', error: error.message });
   }
 });
+
 router.post('/:mapId/downvote', async (req, res) => {
   try {
     const mapId = req.params.mapId;
@@ -226,6 +236,7 @@ router.post('/:mapId/downvote', async (req, res) => {
     res.status(500).json({ message: 'Error al quitar upvote', error: error.message });
   }
 });
+
 router.delete('/:mapId', async (req, res) => {
   try {
     const userId = req.query.userId || req.body.userId;
@@ -269,4 +280,5 @@ router.delete('/:mapId', async (req, res) => {
     res.status(500).json({ message: 'Error al eliminar mapa', error: error.message });
   }
 });
+
 module.exports = router;
