@@ -16,8 +16,6 @@ export class ConfigService {
   }
   
   getAssetUrl(path: string): string {
-    return environment.production 
-      ? `https://your-backend-url.vercel.app${path}`
-      : `http://localhost:3000${path}`;
+    return `https://dashware-backend.onrender.com${path}`;
   }
 }

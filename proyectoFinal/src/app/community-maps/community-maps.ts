@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LocalMapsService, LocalMap } from '../services/local-maps';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 interface Map {
   _id: string;
   name: string;
@@ -26,7 +27,7 @@ interface Map {
 export class CommunityMaps implements OnInit {
   private router = inject(Router);
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
   public localMapsService = inject(LocalMapsService);
   private authService = inject(AuthService);
   maps: Map[] = [];
@@ -68,7 +69,7 @@ export class CommunityMaps implements OnInit {
     this.searchQuery = '';
   }
   getMapImageUrl(map: Map): string {
-    return `http://localhost:3000${map.mapImage}`;
+    return `https://dashware-backend.onrender.com${map.mapImage}`;
   }
   isMapDownloaded(mapId: string): boolean {
     return this.localMapsService.isMapDownloaded(mapId);

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 interface Post {
   _id: string;
   author: string;
@@ -32,7 +33,7 @@ interface CommunityMap {
 export class Community implements OnInit {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
   private router = inject(Router);
   newPostContent: string = '';
   showNewPostForm: boolean = false;
@@ -119,7 +120,7 @@ export class Community implements OnInit {
     this.router.navigate(['/game']);
   }
   getMapImageUrl(map: CommunityMap): string {
-    return `http://localhost:3000${map.mapImage}`;
+    return `https://dashware-backend.onrender.com${map.mapImage}`;
   }
   goToUploadMap() {
     const userId = this.authService.userId();
