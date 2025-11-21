@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install:frontend": "cd proyectoFinal && npm install",
-    "install:backend": "cd backend && npm install",
-    "build": "cd proyectoFinal && npm install && npm run build",
-    "vercel-build": "cd proyectoFinal && npm install && npm run build"
-  },
-  "workspaces": [
-    "proyectoFinal",
-    "backend"
-  ]
+    "build": "cd proyectoFinal && npm ci && npx ng build --configuration production"
+  }
 }
