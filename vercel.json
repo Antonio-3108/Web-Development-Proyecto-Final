@@ -1,33 +1,19 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "cd proyectoFinal && npm install && npm run build",
+  "outputDirectory": "proyectoFinal/dist/proyecto-final/browser",
+  "framework": null,
+  "rewrites": [
     {
-      "src": "proyectoFinal/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "proyectoFinal/dist/proyecto-final/browser"
-      }
+      "source": "/api/(.*)",
+      "destination": "/backend/server.js"
     },
     {
-      "src": "backend/server.js",
-      "use": "@vercel/node"
+      "source": "/uploads/(.*)",
+      "destination": "/backend/server.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/server.js"
-    },
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/backend/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/proyectoFinal/dist/proyecto-final/browser/$1"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
