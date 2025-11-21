@@ -1,0 +1,9 @@
+node_modules
+.git
+.env.local
+.env.atlas
+*.log
+.DS_Store
+backend/uploads
+proyectoFinal/node_modules
+proyectoFinal/.angular

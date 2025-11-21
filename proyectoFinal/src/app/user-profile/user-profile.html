@@ -1,0 +1,139 @@
+<div class="profile-container">
+  <div class="loading-state" *ngIf="isLoading">
+    <p>Cargando perfil...</p>
+  </div>
+  <div class="profile-content" *ngIf="!isLoading">
+    <div class="profile-header">
+      <div class="avatar-container">
+        <img 
+          *ngIf="user.profileImage" 
+          [src]="getProfileImageUrl()" 
+          alt="Foto de perfil"
+          class="profile-image"
+        />
+        <div *ngIf="!user.profileImage" class="avatar">
+          {{ user.name.charAt(0).toUpperCase() }}
+        </div>
+        <div *ngIf="isEditing" class="photo-upload-section">
+          <input 
+            type="file" 
+            accept="image/*" 
+            (change)="onFileSelected($event)"
+            #fileInput
+            style="display: none"
+          />
+          <button 
+            class="change-photo-button" 
+            (click)="fileInput.click()"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            Cambiar Foto
+          </button>
+        </div>
+      </div>
+      <div class="user-info">
+        <div *ngIf="!isEditing">
+          <h2 class="username">{{ user.name }}</h2>
+          <p class="user-bio">{{ user.bio }}</p>
+        </div>
+        <div class="profile-actions" *ngIf="!isEditing">
+          <button class="edit-button" (click)="toggleEdit()">Editar Perfil</button>
+          <button class="logout-button" (click)="logout()">Cerrar Sesión</button>
+        </div>
+        <div *ngIf="isEditing" class="edit-form">
+          <input 
+            type="text" 
+            [(ngModel)]="editedUser.name" 
+            placeholder="Nombre de usuario"
+            class="input-field"
+          />
+          <textarea 
+            [(ngModel)]="editedUser.bio" 
+            placeholder="Biografía"
+            rows="3"
+            class="input-field"
+          ></textarea>
+          <div class="edit-buttons">
+            <button class="save-button" (click)="saveProfile()">Guardar Cambios</button>
+            <button class="cancel-button" (click)="cancelEdit()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="stats-section">
+      <div class="stat-card">
+        <h3>{{ user.stats.gamesPlayed }}</h3>
+        <p>Partidas Jugadas</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ user.stats.wins }}</h3>
+        <p>Victorias</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ user.stats.mapsCreated }}</h3>
+        <p>Mapas Creados</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ user.stats.postsCreated }}</h3>
+        <p>Posts Creados</p>
+      </div>
+    </div>
+    <div class="content-sections">
+      <div class="maps-created">
+        <h2>Mis Mapas</h2>
+        <div class="items-list">
+          <div class="empty-state" *ngIf="userMaps.length === 0">
+            <p>No has creado ningún mapa todavía.</p>
+          </div>
+          <div class="item-card" *ngFor="let map of userMaps">
+            <div *ngIf="!map.isEditing">
+              <h3>{{ map.name }}</h3>
+              <p class="map-description" *ngIf="map.description">{{ map.description }}</p>
+              <div class="item-actions">
+                <button class="action-button edit" (click)="startEditMap(map)">Editar</button>
+                <button class="action-button delete" (click)="deleteMap(map)">Eliminar</button>
+              </div>
+            </div>
+            <div *ngIf="map.isEditing" class="edit-map-form">
+              <input 
+                type="text" 
+                [(ngModel)]="map.editedName" 
+                placeholder="Nombre del mapa"
+                class="input-field"
+                maxlength="50"
+              />
+              <textarea 
+                [(ngModel)]="map.editedDescription" 
+                placeholder="Descripción (opcional)"
+                rows="3"
+                class="input-field"
+                maxlength="500"
+              ></textarea>
+              <div class="item-actions">
+                <button class="action-button save" (click)="saveMapEdit(map)">Guardar</button>
+                <button class="action-button cancel" (click)="cancelEditMap(map)">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="posts-created">
+        <h2>Mis Posts</h2>
+        <div class="items-list">
+          <div class="empty-state" *ngIf="userPosts.length === 0">
+            <p>No has creado ningún post todavía.</p>
+          </div>
+          <div class="item-card" *ngFor="let post of userPosts">
+            <p class="post-content">{{ post.content }}</p>
+            <div class="post-meta">
+              <span>{{ post.createdAt | date:'short' }}</span>
+              <span>{{ post.likes }} me gusta</span>
+            </div>
+            <button class="action-button delete" (click)="deletePost(post)">Eliminar</button>
+    </div>
+  </div>
+</div>

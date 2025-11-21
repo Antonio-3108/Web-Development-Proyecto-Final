@@ -1,0 +1,64 @@
+<div class="profile-container">
+  <h1 class="page-title">Perfil de Usuario</h1>
+  <div class="loading-state" *ngIf="isLoading">
+    <p>Cargando perfil...</p>
+  </div>
+  <div class="not-found" *ngIf="notFound && !isLoading">
+    <h2>Usuario no encontrado</h2>
+    <p>El usuario "{{ username }}" no existe.</p>
+    <button class="back-button" routerLink="/">Volver al inicio</button>
+  </div>
+  <div class="profile-content" *ngIf="user && !isLoading">
+    <div class="profile-header">
+      <img 
+        *ngIf="user.profileImage" 
+        [src]="getProfileImageUrl()" 
+        alt="Foto de perfil"
+        class="avatar"
+      />
+      <div *ngIf="!user.profileImage" class="avatar">
+        {{ user.username.charAt(0).toUpperCase() }}
+      </div>
+      <div class="user-info">
+        <h2 class="username">{{ user.username }}</h2>
+        <p class="user-bio">{{ user.bio }}</p>
+      </div>
+    </div>
+    <div class="stats-section">
+      <div class="stat-card">
+        <h3>{{ user.stats.gamesPlayed }}</h3>
+        <p>Partidas Jugadas</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ user.stats.wins }}</h3>
+        <p>Victorias</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ user.stats.mapsCreated }}</h3>
+        <p>Mapas Creados</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ user.stats.postsCreated }}</h3>
+        <p>Posts Creados</p>
+      </div>
+    </div>
+    <div class="content-sections">
+      <div class="maps-created">
+        <h2>Mapas</h2>
+        <div class="items-list">
+          <div class="empty-state">
+            <p>No hay mapas disponibles.</p>
+          </div>
+        </div>
+      </div>
+      <div class="posts-created">
+        <h2>Posts</h2>
+        <div class="items-list">
+          <div class="empty-state">
+            <p>No hay posts disponibles.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

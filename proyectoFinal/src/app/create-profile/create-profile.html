@@ -1,0 +1,90 @@
+<div class="create-profile-container">
+  <div class="content-wrapper">
+    <h1 class="page-title">Bienvenido a DashWare</h1>
+    <p class="subtitle">Crea tu perfil o inicia sesión para comenzar</p>
+    <div class="mode-selector">
+      <button 
+        class="mode-button" 
+        [class.active]="mode === 'create'"
+        (click)="setMode('create')"
+      >
+        Crear Perfil
+      </button>
+      <button 
+        class="mode-button" 
+        [class.active]="mode === 'login'"
+        (click)="setMode('login')"
+      >
+        Iniciar Sesión
+      </button>
+    </div>
+    <div *ngIf="!submitted" class="form-container">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group" *ngIf="mode === 'create'">
+          <label for="username">Nombre de Usuario</label>
+          <input 
+            type="text" 
+            id="username"
+            [(ngModel)]="formData.username" 
+            name="username"
+            class="input-field"
+            placeholder="Elige un nombre único"
+            required
+          />
+          <p class="error-message" *ngIf="errors.username">{{ errors.username }}</p>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email"
+            [(ngModel)]="formData.email" 
+            name="email"
+            class="input-field"
+            placeholder="tu@email.com"
+            required
+          />
+          <p class="error-message" *ngIf="errors.email">{{ errors.email }}</p>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input 
+            type="password" 
+            id="password"
+            [(ngModel)]="formData.password" 
+            name="password"
+            class="input-field"
+            placeholder="Mínimo 6 caracteres"
+            required
+          />
+          <p class="error-message" *ngIf="errors.password">{{ errors.password }}</p>
+        </div>
+        <div class="form-group" *ngIf="mode === 'create'">
+          <label for="confirmPassword">Confirmar Contraseña</label>
+          <input 
+            type="password" 
+            id="confirmPassword"
+            [(ngModel)]="formData.confirmPassword" 
+            name="confirmPassword"
+            class="input-field"
+            placeholder="Repite tu contraseña"
+            required
+          />
+          <p class="error-message" *ngIf="errors.confirmPassword">{{ errors.confirmPassword }}</p>
+        </div>
+        <button 
+          type="submit" 
+          class="submit-button"
+          [disabled]="isSubmitting"
+        >
+          {{ isSubmitting ? 'Procesando...' : (mode === 'create' ? 'Crear Perfil' : 'Iniciar Sesión') }}
+        </button>
+      </form>
+    </div>
+    <div *ngIf="submitted" class="success-message">
+      <h2>{{ mode === 'create' ? 'Perfil Creado' : 'Sesión Iniciada' }}</h2>
+      <p>{{ mode === 'create' ? 'Tu perfil ha sido creado exitosamente.' : 'Bienvenido de vuelta.' }}</p>
+      <button class="continue-button" (click)="continueToApp()">Continuar</button>
+    </div>
+  </div>
+</div>

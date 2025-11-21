@@ -1,0 +1,77 @@
+:root {
+  --primary-blue: #4e5ef9;
+  --primary-blue-dark: #3a48c7;
+  --primary-blue-light: #5a6bfa;
+  --primary-blue-lighter: #6a79fb;
+  --accent-purple: #764ba2;
+  --accent-purple-light: #8b5fb8;
+  --accent-cyan: #00d4ff;
+  --accent-cyan-light: #4facfe;
+  --accent-teal: #38f9d7;
+  --accent-green: #4ef95e;
+  --accent-green-dark: #10b981;
+  --accent-orange: #ff9500;
+  --accent-red: #f94e4e;
+  --accent-yellow: #ffd700;
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #2a2a2a;
+  --bg-tertiary: #3a3a3a;
+  --bg-card: #2a2a2a;
+  --bg-card-hover: #353535;
+  --gradient-primary: linear-gradient(135deg, #4e5ef9 0%, #3a48c7 100%);
+  --gradient-secondary: linear-gradient(135deg, #5a6bfa 0%, #4e5ef9 100%);
+  --gradient-tertiary: linear-gradient(135deg, #6a79fb 0%, #5a6bfa 100%);
+  --gradient-success: linear-gradient(135deg, #4ef95e 0%, #38f9d7 100%);
+  --gradient-dark: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-cyan: linear-gradient(135deg, #4facfe 0%, #00d4ff 100%);
+  --border-light: #3a3a3a;
+  --border-medium: #4a4a4a;
+  --border-accent: #4e5ef9;
+  --border-glow: rgba(78, 94, 249, 0.4);
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --text-dim: #666666;
+  --success: #4ef95e;
+  --success-dark: #10b981;
+  --warning: #ff9500;
+  --error: #f94e4e;
+  --info: #4e5ef9;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(78, 94, 249, 0.4);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 212, 255, 0.4);
+  --shadow-glow-green: 0 0 20px rgba(78, 249, 94, 0.4);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body { 
+  height: 100%; 
+  background-color: var(--bg-primary);
+}
+body { 
+  margin: 0; 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+::-webkit-scrollbar-thumb {
+  background: #4e5ef9;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3d4dd8;
+}

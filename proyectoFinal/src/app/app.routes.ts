@@ -1,0 +1,19 @@
+import { Routes } from '@angular/router';
+import { LandingPage } from './landing-page/landing-page';
+import { Community } from './community/community';
+import { UserProfile } from './user-profile/user-profile';
+import { CreateProfile } from './create-profile/create-profile';
+import { GameContainerComponent } from './game-container/game-container';
+import { PublicProfile } from './public-profile/public-profile';
+import { CommunityMaps } from './community-maps/community-maps';
+import { MapUpload } from './map-upload/map-upload';
+export const routes: Routes = [
+  { path: '', component: LandingPage },
+  { path: 'community', component: Community },
+  { path: 'community-maps', component: CommunityMaps },
+  { path: 'map-upload', component: MapUpload },
+  { path: 'user-profile', component: UserProfile },
+  { path: 'create-profile', component: CreateProfile },
+  { path: 'game', component: GameContainerComponent },
+  { path: 'user/:username', component: PublicProfile }
+];
