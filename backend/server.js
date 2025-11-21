@@ -35,9 +35,8 @@ app.use('/api/posts', require('./routes/posts'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/maps', require('./routes/maps'));
 const PORT = process.env.PORT || 3000;
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
-  });
-}
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+});
+
 module.exports = app;
