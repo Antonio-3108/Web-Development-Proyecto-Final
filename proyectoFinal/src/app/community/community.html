@@ -1,0 +1,81 @@
+<div class="community-container">
+  <h1 class="page-title">Comunidad</h1>
+  <div class="content-grid">
+    <div class="posts-section">
+      <div class="section-header">
+        <h2>Posts</h2>
+        <button class="create-button" (click)="toggleNewPostForm()">
+          {{ showNewPostForm ? 'Cancelar' : 'Crear Post' }}
+        </button>
+      </div>
+      <div class="new-post-form" *ngIf="showNewPostForm">
+        <textarea
+          [(ngModel)]="newPostContent"
+          placeholder="Comparte algo con la comunidad..."
+          rows="4"
+        ></textarea>
+        <button class="submit-button" (click)="createPost()">Publicar</button>
+      </div>
+      <div class="posts-list">
+        <div class="empty-state" *ngIf="posts.length === 0">
+          <p>No hay posts todavía. Sé el primero en compartir algo con la comunidad.</p>
+        </div>
+        <div class="post-card" *ngFor="let post of posts">
+          <div class="post-header">
+            <span class="post-author">{{ post.authorUsername }}</span>
+            <span class="post-date">{{ post.createdAt | date:'short' }}</span>
+          </div>
+          <p class="post-content">{{ post.content }}</p>
+          <div class="post-footer">
+            <button
+              class="like-button"
+              [class.liked]="hasLiked(post)"
+              (click)="likePost(post)"
+            >
+              <svg class="like-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 22V11M2 13V20C2 21.1046 2.89543 22 4 22H16.4262C17.907 22 19.1662 20.9197 19.3914 19.4562L20.4683 12.4562C20.7479 10.6389 19.3418 9 17.5032 9H14C13.4477 9 13 8.55228 13 8V4.46584C13 3.10399 11.896 2 10.5342 2C10.2093 2 9.91498 2.1913 9.78306 2.48812L7.26394 8.40614C7.09746 8.76727 6.74355 9 6.35013 9H4C2.89543 9 2 9.89543 2 11V13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="like-count">{{ post.likes }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="maps-section">
+      <div class="section-header">
+        <h2>Mapas Populares</h2>
+        <div class="map-buttons">
+          <button class="create-button" (click)="goToUploadMap()">
+            Subir Mapa
+          </button>
+          <button class="view-all-button" (click)="goToCommunityMaps()">
+            Ver Todos
+          </button>
+        </div>
+      </div>
+      <div class="maps-list">
+        <div class="empty-state" *ngIf="maps.length === 0">
+          <p>No hay mapas disponibles todavía.</p>
+          <p>Sé el primero en crear y compartir un mapa.</p>
+        </div>
+        <div class="map-card" *ngFor="let map of maps">
+          <div class="map-preview-small">
+            <img [src]="getMapImageUrl(map)" [alt]="map.name" class="map-image-small" />
+          </div>
+          <h3 class="map-name">{{ map.name }}</h3>
+          <p class="map-author">Por: {{ map.authorUsername }}</p>
+          <p class="map-description">{{ map.description }}</p>
+          <div class="map-stats">
+            <span class="stat">
+              <svg class="stat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 22V11M2 13V20C2 21.1046 2.89543 22 4 22H17.4262C18.907 22 20.1662 20.9197 20.3914 19.4562L21.4683 12.4562C21.7479 10.6389 20.3418 9 18.5032 9H15V4C15 2.89543 14.1046 2 13 2C12.4477 2 12 2.44772 12 3V3.44885C12 3.79445 11.8683 4.12515 11.6325 4.37235L8.8944 7.23809C8.3314 7.83913 8 8.63753 8 9.47075V11"></path>
+              </svg>
+              {{ map.upvotes || 0 }}
+            </span>
+          </div>
+          <button class="play-map-button" (click)="playMap(map)">Jugar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
