@@ -2,32 +2,41 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 const Map = require('../models/Map');
 const User = require('../models/User');
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const dir = file.fieldname === 'mapFile' ? 'uploads/maps/files' : 'uploads/maps/images';
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+const { cloudinary, mapImageStorage, mapFileStorage } = require('../config/cloudinary');
+
+// Configurar multer para manejar múltiples archivos con diferentes storages
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+// Storage dinámico que cambia según el fieldname
+const dynamicStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: (req, file) => {
+    if (file.fieldname === 'mapFile') {
+      return {
+        folder: 'maps/files',
+        allowed_formats: ['json'],
+        resource_type: 'raw'
+      };
+    } else if (file.fieldname === 'mapImage') {
+      return {
+        folder: 'maps/images',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+        resource_type: 'image'
+      };
     }
-    cb(null, dir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
   }
 });
+
 const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 10 * 1024 * 1024 
-  },
+  storage: dynamicStorage,
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: function (req, file, cb) {
     if (file.fieldname === 'mapFile') {
       const allowedExts = ['.json', '.map'];
       const ext = path.extname(file.originalname).toLowerCase();
-      if (allowedExts.includes(ext)) {
+      if (allowedExts.includes(ext) || file.mimetype === 'application/json') {
         cb(null, true);
       } else {
         cb(new Error('Solo se permiten archivos .json o .map'));
@@ -90,24 +99,29 @@ router.post('/upload', upload.fields([
 ]), async (req, res) => {
   try {
     const { userId, name, description } = req.body;
+    
     if (!req.files || !req.files.mapFile || !req.files.mapImage) {
       return res.status(400).json({ message: 'Se requieren ambos archivos: mapa e imagen' });
     }
+    
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
+    
     const map = new Map({
       name,
       description: description || '',
       author: userId,
       authorUsername: user.username,
-      mapFile: '/uploads/maps/files/' + req.files.mapFile[0].filename,
-      mapImage: '/uploads/maps/images/' + req.files.mapImage[0].filename
+      mapFile: req.files.mapFile[0].path,
+      mapImage: req.files.mapImage[0].path
     });
+    
     await map.save();
     user.stats.mapsCreated++;
     await user.save();
+    
     res.status(201).json(map);
   } catch (error) {
     res.status(500).json({ message: 'Error al subir mapa', error: error.message });
@@ -220,27 +234,38 @@ router.delete('/:mapId', async (req, res) => {
     if (!userId) {
       return res.status(400).json({ message: 'userId es requerido' });
     }
+    
     const map = await Map.findById(req.params.mapId);
     if (!map) {
       return res.status(404).json({ message: 'Mapa no encontrado' });
     }
+    
     if (map.author.toString() !== userId) {
       return res.status(403).json({ message: 'No tienes permiso para eliminar este mapa' });
     }
-    const mapFilePath = path.join(__dirname, '..', map.mapFile);
-    const imagePath = path.join(__dirname, '..', map.mapImage);
-    if (fs.existsSync(mapFilePath)) {
-      fs.unlinkSync(mapFilePath);
+    
+    // Eliminar archivos de Cloudinary
+    try {
+      if (map.mapFile && map.mapFile.includes('cloudinary')) {
+        const publicId = map.mapFile.split('/').slice(-2).join('/').split('.')[0];
+        await cloudinary.uploader.destroy(publicId, { resource_type: 'raw' });
+      }
+      if (map.mapImage && map.mapImage.includes('cloudinary')) {
+        const publicId = map.mapImage.split('/').slice(-2).join('/').split('.')[0];
+        await cloudinary.uploader.destroy(publicId);
+      }
+    } catch (err) {
+      console.log('Error eliminando archivos de Cloudinary:', err.message);
     }
-    if (fs.existsSync(imagePath)) {
-      fs.unlinkSync(imagePath);
-    }
+    
     await Map.findByIdAndDelete(req.params.mapId);
+    
     const user = await User.findById(userId);
     if (user && user.stats.mapsCreated > 0) {
       user.stats.mapsCreated--;
       await user.save();
     }
+    
     res.json({ message: 'Mapa eliminado' });
   } catch (error) {
     res.status(500).json({ message: 'Error al eliminar mapa', error: error.message });
