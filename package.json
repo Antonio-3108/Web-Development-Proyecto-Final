@@ -4,5 +4,10 @@
   "private": true,
   "scripts": {
     "build": "cd proyectoFinal && rm -rf node_modules package-lock.json && npm install && npm run build"
+  },
+  "dependencies": {
+    "cloudinary": "^2.8.0",
+    "multer": "^2.0.2",
+    "streamifier": "^0.1.1"
   }
 }
