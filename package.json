@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "cd proyectoFinal && npm ci && npx --yes @angular/cli@20 build --configuration production"
+    "build": "cd proyectoFinal && npm install && ./node_modules/.bin/ng build --configuration production"
   }
 }
