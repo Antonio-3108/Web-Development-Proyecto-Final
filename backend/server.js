@@ -4,14 +4,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 const app = express();
-const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-frontend-url.vercel.app', 'https://*.vercel.app']
-    : ['http://localhost:4200', 'http://localhost:3000'],
-  credentials: true,
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 mongoose.connect(process.env.MONGODB_URI, {
